@@ -1,118 +1,107 @@
 <html>
-
-<!--
-    
-    Note to Students:
-
-        This is a very short introduction to using Javascript in the browser.
-
-        To see this as a webpage, you have to start a *Local Web Server*. There are many ways to do this: since you all have python installed, we will use python.
-
-        - Open terminal
-
-        - 'cd' into the directory where this html file is (js_in_webpage.html)
-
-        - Type the following into the terminal and hit 'enter':
-            python -m SimpleHTTPServer
-
-            your server should read something like: Serving HTTP on 0.0.0.0 port 8000 ...
-
-        - now go to any browser and type in the HTTP address and the filename: something like:
-
-            http://0.0.0.0:8000/js_in_webpage.html
-
-            or
-
-            http://localhost:8000/js_in_webpage.html
-        
-        - Congrats: you now have a local HTTP server running. Now, every time you change this file and save it, when you reload the browser you will see your changes!
--->
-
-<head><title>Intro to JS in a Browser</title></head>
-
 <body>
 
-<h1>Intro to JS in a Browser</h1>
-<h2>All of the below is created with Javascript. </h2>
+<p><b>Hello This Work for Module5 in JavaScript. Both the Reverse function and Multiple Function are in the same HTML Page.</b></p>
 
-<script type="text/javascript">
+<!-- Function 1 -->
+<p><b>Function1:- Enter a word and Click the button to generate reverse.</b></p>
 
-// Here are some examples of things that you might want to do with Javascript
-
-// writing to a document directly
-
-document.write('<p><b>While you are working in Javascript (or any language), it is really important to be able to debug. Some browsers offer very simple ways to see what is happening on a page.</b></p>');
-document.write('<p>Chrome and Firefox in particular offer good Developer Tools and Javascript console access</p><br>');
-</script>
-
-<script type="text/javascript">
-
-// Find this bug in the console and fix it!
-
-document.write('<p>These are really helpful for finding bugs!</p><br>');
-</script>
-
-
-<script type="text/javascript">
-
-// Variables and Math:
-
-var num1 = '5';
-var num2 = '5';
-var answer;
-
-answer = +num1 + +num2
-
-document.write(num1 + ' plus ' + num2 + '= ' + answer );
-
-document.write('<p>An example of a random number would be ' + Math.random() + '</p>');
-
-var rightNow = new Date();
-
-document.write('<p>Right now it is ' + rightNow + '<p>');
-
-</script>
-
-
-<script type="text/javascript">
-
-document.write('<br><p>Is a number even or odd, is it divisible by 3?')
-
-// Basic functions
-
-function divis(num,d){
-    var evenOdd = 'odd';
-    if (num%2 == 0) {evenOdd = 'even';};
-
-    var ddiv = false;
-    if (num%d == 0) {ddiv = true;};
-
-    var dtext; 
-    if (ddiv==true){dtext = 'is '} else (dtext = 'is not ');
-
-    var str;
-    str = num + ' is ' + evenOdd +' and ' + dtext + 'divisible by ' + d;
-    
-    return(str);
-};
-
-function calc(){
-    var t = document.getElementById("target");
-    t.innerHTML = divis(document.getElementById('num').value, 3);
-}
-</script>
 <p>
-<form>
-    <input id="num" type="number" size="4">
-    <input type="button" value="check" onClick="calc();">
+<form name= 'reverse' >
+    <input id="word" type="string" size="20">
+    <input type="button" style="background-color:black;color:white;width:150px;height:40px;" value="Generate Reverse" onClick="ans1();">
 </form>
 </p>
 
-<div id="target"></div>
+<p id = "Q1"> </p>
 
-<script type="text/javascript" src="other_script.js"></script>
 
-<script type="text/javascript"> document.write(myScript());</script>
+<!-- Function 2 -->
+
+<p><b>Function 2:- Enter a number and Click the button to generate first 20 Multiples.</b></p>
+
+<p>
+<form name= 'MultipleTable' >
+    <input id="num" type="number" size="20">
+    <input type="button" style="background-color:black;color:white;width:150px;height:40px;" value="Generate 20 Multiples" onClick="ans2();">
+</form>
+</p>
+
+<p id="Generate"></p>
+
+<script type="text/javascript">
+
+function reverser(string){
+    var output = '';
+    output = string.split('').reverse().join('');
+    return output
+};
+function ans1(){
+    var target = document.getElementById('Q1');
+    target.innerHTML = reverser(document.reverse.word.value);
+};
+
+
+<!--Question 2 creates an array of multiples-->
+function multiples(count){
+    myArray = [];
+    for (i = 1; i <= count; i++) {myArray.push(document.MultipleTable.num.value * (1 * i))};
+    return myArray
+}
+
+
+function MakeTable(inputArray){
+    var elements = inputArray.length;
+    var outHTML = '<table>';
+    for (i = 0; i < elements; i++){
+        if (i % 4 ==0){outHTML= outHTML +'<tr>'};
+        outHTML = outHTML + '<td>'+ inputArray[i]+ '</td>';
+        if (i % 4 ==4-1){outHTML = outHTML +'</tr>'};
+    };
+    outHTML = outHTML + '</table>';
+    return outHTML
+};
+
+function ans2(){
+  var target = document.getElementById("Generate");
+  target.innerHTML = MakeTable(multiples(20));
+};
+
+
+
+</script>
+
+<p><b>Function 3:- Display Presidents Data.</b></p>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<!--<script src="d3.min.js"></script>-->
+<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
+        
+
+<script type="text/javascript"charset="utf-8">
+    d3.text("/data/presidents.csv", function(data) {
+    var parsedCSV = d3.csv.parseRows(data);
+    var container = d3.select("body")
+    .append("table")
+    .selectAll("tr")
+    .data(parsedCSV).enter()
+    .append("tr")
+    .selectAll("td")
+    .data(function(d) { return d; }).enter()
+    .append("td")
+    .text(function(d) { return d; });
+    });
+</script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<p>
+<form name= 'pres' >
+    <input id="word" type="string" size="20">
+    <input type="button" style="background-color:black;color:white;width:150px;height:40px;" value="President" onClick="FindPresDetails();">
+</form>
+</p>
+
+<script>
+
+</script>
 
 </body>
 </html>
