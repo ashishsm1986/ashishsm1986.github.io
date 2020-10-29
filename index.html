@@ -78,7 +78,7 @@ function answer2(){
         
 
 <script type="text/javascript"charset="utf-8">
-    d3.text("/data/presidents.csv", function(data) {
+    d3.text("https://raw.githubusercontent.com/ashishsm1986/CUNY_DATA_608/master/module5/data/presidents.csv", function(data) {
     var parsedCSV = d3.csv.parseRows(data);
     var container = d3.select("body")
     .append("table")
