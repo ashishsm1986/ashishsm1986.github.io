@@ -9,7 +9,7 @@
 <p>
 <form name= 'reverse' >
     <input id="word" type="string" size="20">
-    <input type="button" style="background-color:black;color:white;width:150px;height:40px;" value="Generate Reverse" onClick="ans1();">
+    <input type="button" style="background-color:black;color:white;width:150px;height:40px;" value="Generate Reverse" onClick="answer1();">
 </form>
 </p>
 
@@ -23,7 +23,7 @@
 <p>
 <form name= 'MultipleTable' >
     <input id="num" type="number" size="20">
-    <input type="button" style="background-color:black;color:white;width:150px;height:40px;" value="Generate 20 Multiples" onClick="ans2();">
+    <input type="button" style="background-color:black;color:white;width:150px;height:40px;" value="Generate 20 Multiples" onClick="answer2();">
 </form>
 </p>
 
@@ -36,7 +36,7 @@ function reverser(string){
     output = string.split('').reverse().join('');
     return output
 };
-function ans1(){
+function answer1(){
     var target = document.getElementById('Q1');
     target.innerHTML = reverser(document.reverse.word.value);
 };
@@ -62,7 +62,7 @@ function MakeTable(inputArray){
     return outHTML
 };
 
-function ans2(){
+function answer2(){
   var target = document.getElementById("Generate");
   target.innerHTML = MakeTable(multiples(20));
 };
